@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.HashSet;
 
 //include Contact;
 public class Phonebook {
@@ -22,6 +21,7 @@ public class Phonebook {
         }
         phonebook.remove(index);
     }
+	
 	public static void FindContact(ArrayList<Contact> phonebook,String Name) {
 		System.out.println("~~~contact with name: "+ Name+" in the phonebook: ~~~"); 
 		for (Contact cont : phonebook) {
@@ -29,20 +29,25 @@ public class Phonebook {
 	            	cont.PrintContact();
 	            }
 	        }
-		 System.out.println("~~~contact with name: "+ Name+" in the phonebook: ~~~");
+		 System.out.println("~~~contact inside phonebook with name: "+ Name+" : ~~~");
 	}
-    public static void deleteDuplicateNames(ArrayList<Contact> phonebook) {
-        ArrayList<Contact> uniqueNames = new ArrayList<Contact>();
-        for (Contact cont : phonebook) {
-            if (uniqueNames.contains(cont)) {
-                DeleteContact(phonebook,cont.GetName());
-            }
-            else { 
-            uniqueNames.add(cont);
-            }
-        }
-
-    }
+	
+	public static void deleteDuplicateNames(ArrayList<Contact> phonebook) {
+	    ArrayList<String> uniqueNames = new ArrayList<String>();
+	    ArrayList<Contact> contactsToDelete = new ArrayList<Contact>();
+	    for (Contact cont : phonebook) {
+	        if (uniqueNames.contains(cont.GetName())) {
+	            contactsToDelete.add(cont);
+	        } else { 
+	            uniqueNames.add(cont.GetName());
+	        }
+	    }
+	    for (Contact cont : contactsToDelete) {
+	        DeleteContact(phonebook,cont.GetName());
+	    }
+	}
+	
+    
 	public static void main(String[] args) {
 		ArrayList<Contact> phonebook = new ArrayList<Contact>();
 
@@ -71,6 +76,11 @@ public class Phonebook {
 		contact5.SetName("shlomo");
 		contact5.SetNumber("444-2222");
 		phonebook.add(contact5);
+		
+		Contact contact6 = new Contact();
+		contact6.SetName("shlomo");
+		contact6.SetNumber("444-3333");
+		phonebook.add(contact6);
 		
 		String cont2Name=contact2.GetName();
 		DeleteContact(phonebook,cont2Name); //delete moshe
