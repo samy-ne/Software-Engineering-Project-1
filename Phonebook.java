@@ -1,23 +1,83 @@
 import java.util.ArrayList;
+import java.util.HashSet;
+
 //include Contact;
 public class Phonebook {
-	public static void main(String[] args) {
-		ArrayList<Contact> phonebook = new ArrayList<Contact>();
-		
-		// add some contacts to the phonebook
-		Contact contact1 = new Contact();
-		contact1.SetName("yaniv");
-		contact1.SetNumber("555-1234");
-		phonebook.add(contact1);
-		
-		Contact contact2 = new Contact();
-		contact2.SetName("hajaj");
-		contact2.SetNumber("555-5678");
-		phonebook.add(contact2);
-		
-		// print all contacts in the phonebook
+	
+	// print all contacts in the phonebook
+	public static void printAllContact(ArrayList<Contact> phonebook) {
+		System.out.println("~~~all contacts in the phone book: ~~~");
 		for (Contact contact : phonebook) {
 			contact.PrintContact();
 		}
+		System.out.println("~~~all contacts in the phone book: ~~~");
 	}
+	public static void DeleteContact(ArrayList<Contact> phonebook,String Name) {
+        int index=0;
+        for (Contact cont : phonebook) {
+            if (cont.GetName().compareTo(Name)==0) {
+                break;
+            }
+            index=index+1;
+        }
+        phonebook.remove(index);
+    }
+	public static void FindContact(ArrayList<Contact> phonebook,String Name) {
+		System.out.println("~~~contact with name: "+ Name+" in the phonebook: ~~~"); 
+		for (Contact cont : phonebook) {
+	            if (cont.GetName().equals(Name)) {
+	            	cont.PrintContact();
+	            }
+	        }
+		 System.out.println("~~~contact with name: "+ Name+" in the phonebook: ~~~");
+	}
+    public static void deleteDuplicateNames(ArrayList<Contact> phonebook) {
+        ArrayList<Contact> uniqueNames = new ArrayList<Contact>();
+        for (Contact cont : phonebook) {
+            if (uniqueNames.contains(cont)) {
+                DeleteContact(phonebook,cont.GetName());
+            }
+            else { 
+            uniqueNames.add(cont);
+            }
+        }
+
+    }
+	public static void main(String[] args) {
+		ArrayList<Contact> phonebook = new ArrayList<Contact>();
+
+		// add some contacts to the phonebook
+		Contact contact1 = new Contact();
+		contact1.SetName("moahe");
+		contact1.SetNumber("111-1234");
+		phonebook.add(contact1);
+		
+		Contact contact2 = new Contact();
+		contact2.SetName("david");
+		contact2.SetNumber("222-5678");
+		phonebook.add(contact2);
+		
+		Contact contact3 = new Contact();
+		contact3.SetName("avraham");
+		contact3.SetNumber("333-1234");
+		phonebook.add(contact3);
+		
+		Contact contact4 = new Contact();
+		contact4.SetName("shlomo");
+		contact4.SetNumber("444-1111");
+		phonebook.add(contact4);
+		
+		Contact contact5 = new Contact();
+		contact5.SetName("shlomo");
+		contact5.SetNumber("444-2222");
+		phonebook.add(contact5);
+		
+		String cont2Name=contact2.GetName();
+		DeleteContact(phonebook,cont2Name); //delete moshe
+		FindContact(phonebook,"shlomo");
+		deleteDuplicateNames(phonebook);
+		printAllContact(phonebook);
+
+	}
+	
 }
