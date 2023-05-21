@@ -59,7 +59,7 @@ public class Phonebook {
 		
 		Contact contact2 = new Contact();
 		contact2.SetName("samy");
-		contact2.SetNumber("222-5678");
+		contact2.SetNumber("222-56789");
 		phonebook.add(contact2);
 				
 		Contact contact3 = new Contact();
